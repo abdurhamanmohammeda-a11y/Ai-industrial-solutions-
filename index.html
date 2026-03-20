@@ -3,54 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Industrial Solutions | Smart Maintenance</title>
+    <title>AI Industrial Solutions</title>
+    <!-- CSS external -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- TensorFlow.js & MobileNet -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script>
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Firebase SDK (modular) -->
+    <script type="module" src="script.js"></script>
 </head>
 <body>
-    <header>
+    <!-- Authentication Section -->
+    <div id="authSection" class="auth-container">
+        <h2>🚀 AI Industrial Solutions</h2>
+        <p>Galmaa’i ykn seenni itti fayyadamuf</p>
+        <input type="email" id="email" placeholder="Email" autocomplete="email">
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+        <button id="loginBtn">Seeni</button>
+        <button id="signupBtn">Galmaa’i</button>
+        <div id="authMessage"></div>
+        <div id="toggleMode" class="toggle-link">Galmaa’iif</div>
+    </div>
+
+    <!-- Main App (visible after login) -->
+    <div id="mainApp" class="main-app">
         <div class="container">
-            <h1>AI Industrial Solutions</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#ai-section">AI Scanner</a></li>
-                    <li><a href="#logs">Maintenance Logs</a></li>
-                </ul>
-            </nav>
+            <div class="top-bar">
+                <button id="logoutButton" class="logout-btn">🚪 Ba’i</button>
+            </div>
+            <h1>🏭 AI Industrial Solutions</h1>
+            <p class="sub">Smart Diagnostics & Predictive Maintenance</p>
+
+            <div class="grid">
+                <!-- Card 1: AI Diagnosis -->
+                <div class="card">
+                    <h2>🖼️ AI Diagnostic</h2>
+                    <p>Suuraa maashinii olkaasi, AI'n rakkoo madaala.</p>
+                    <input type="file" id="imageUpload" accept="image/*">
+                    <canvas id="canvas" style="display:none;"></canvas>
+                    <button id="analyzeBtn">🔍 Analyze</button>
+                    <div id="aiResult" class="result-area">⏳ Waiting...</div>
+                    <small class="note">* MobileNet demo; model addaatiin jijjiiruu dandeessa.</small>
+                </div>
+
+                <!-- Card 2: Recommendation -->
+                <div class="card">
+                    <h2>⚙️ Gorsa Kunuunsa</h2>
+                    <label>Maashinii:</label>
+                    <select id="machineType">
+                        <option>Motor</option><option>Conveyor</option><option>Pump</option>
+                        <option>Fan</option><option>Compressor</option>
+                    </select>
+                    <label>Rakkoo:</label>
+                    <select id="issueType">
+                        <option>Overheating</option><option>Vibration</option><option>Noise</option>
+                        <option>Leakage</option><option>Low Performance</option>
+                    </select>
+                    <button id="getRecBtn">📋 Gorsa Argadhu</button>
+                    <div id="recommendationBox" class="result-area">👉 Gorsa asitti mul’ata.</div>
+                    <button id="saveHistoryBtn">💾 Seenaa keessa kaa’i</button>
+                </div>
+
+                <!-- Card 3: History & Predictive -->
+                <div class="card">
+                    <h2>📆 Seenaa & Rakkoo Duraan Argaa</h2>
+                    <div id="predictionArea" class="result-area">🔄 Tilmaama itti aanu...</div>
+                    <div style="overflow-x:auto;">
+                        <table id="historyTable">
+                            <thead><tr><th>Guyyaa</th><th>Maashinii</th><th>Rakkoo</th><th>Gorsa</th><th></th></tr></thead>
+                            <tbody id="historyBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="flex-btns">
+                        <button id="exportCsvBtn">📎 CSV</button>
+                        <button id="exportPdfBtn">📄 PDF</button>
+                        <button id="clearHistoryBtn">🗑️ Balleessi</button>
+                    </div>
+                </div>
+            </div>
+            <footer>⚡ Enterprise Cloud Edition | Powered by Firebase</footer>
         </div>
-    </header>
-
-    <main class="container">
-        <section id="ai-section" class="card">
-            <h2>Industrial Machine Diagnostic (AI)</h2>
-            <p>Suuraa meeshaa maashinii keetii ol-kaasi, AI'n rakkoo jiru siif haa saku.</p>
-            <div class="upload-area">
-                <input type="file" id="imageInput" accept="image/*">
-                <button id="analyzeBtn" class="btn-primary">Analyze Machine Part</button>
-            </div>
-            <div id="aiResult" class="result-box">
-                Waiting for analysis...
-            </div>
-        </section>
-
-        <section id="logs" class="card">
-            <h2>Maintenance History</h2>
-            <table id="logsTable">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Machine Part</th>
-                        <th>Status</th>
-                        <th>AI Recommendation</th>
-                    </tr>
-                </thead>
-                <tbody id="logsBody">
-                    </tbody>
-            </table>
-        </section>
-    </main>
-
-    <script type="module" src="app.js"></script>
+    </div>
 </body>
 </html>
