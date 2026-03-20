@@ -1,0 +1,56 @@
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #e67e22;
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    color: var(--text-color);
+}
+
+.container { width: 90%; max-width: 1100px; margin: auto; }
+
+header {
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+}
+
+header h1 { margin: 0; font-size: 1.5rem; }
+
+nav ul { list-style: none; display: flex; gap: 20px; padding: 0; }
+nav a { color: white; text-decoration: none; font-weight: bold; }
+
+.card {
+    background: white;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.upload-area { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result-box {
+    background: #e9ecef;
+    padding: 15px;
+    border-left: 5px solid var(--accent-color);
+    min-height: 50px;
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+table th, table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+table th { background: var(--primary-color); color: white; }
