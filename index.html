@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="om">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Industrial Solutions | Smart Maintenance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Industrial Solutions</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#ai-section">AI Scanner</a></li>
+                    <li><a href="#logs">Maintenance Logs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="ai-section" class="card">
+            <h2>Industrial Machine Diagnostic (AI)</h2>
+            <p>Suuraa meeshaa maashinii keetii ol-kaasi, AI'n rakkoo jiru siif haa saku.</p>
+            <div class="upload-area">
+                <input type="file" id="imageInput" accept="image/*">
+                <button id="analyzeBtn" class="btn-primary">Analyze Machine Part</button>
+            </div>
+            <div id="aiResult" class="result-box">
+                Waiting for analysis...
+            </div>
+        </section>
+
+        <section id="logs" class="card">
+            <h2>Maintenance History</h2>
+            <table id="logsTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Machine Part</th>
+                        <th>Status</th>
+                        <th>AI Recommendation</th>
+                    </tr>
+                </thead>
+                <tbody id="logsBody">
+                    </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
