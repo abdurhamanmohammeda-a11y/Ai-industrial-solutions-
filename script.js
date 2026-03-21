@@ -53,7 +53,32 @@ async function loadHistory() {
     renderHistoryTable();
     updatePrediction();
 }
-
+async function analyzeImage(file) {
+    // Mobilenet model fe'i (yoo hin fe'amne)
+    if (!window.mobilenetModel) {
+        window.mobilenetModel = await mobilenet.load();
+    }
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    return new Promise((resolve) => {
+        img.onload = async () => {
+            const canvas = document.getElementById('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            const predictions = await window.mobilenetModel.classify(canvas);
+            const top = predictions[0].className.toLowerCase();
+            let diag = "✅ Maashiniin kee fayyaa jira.";
+            if (top.includes("motor") || top.includes("engine")) diag = "⚠️ Mootorii: overheating ykn vibration ta'uu danda'a.";
+            else if (top.includes("fan")) diag = "🔄 Faaniin: bearing ykn jiidhina sakatta'i.";
+            else if (top.includes("pump")) diag = "💧 Pump: leakage ykn hojiin hir'achuu sakatta'i.";
+            else if (top.includes("conveyor")) diag = "⚙️ Conveyor: belttiin gadi fageenya, vibration jiraachuu danda'a.";
+            resolve({ diag, topClass: predictions[0].className });
+            URL.revokeObjectURL(img.src);
+        };
+    });
+        }
 // ---------- Add new entry ----------
 async function addHistoryEntry(entry) {
     const colRef = getHistoryCollection();
